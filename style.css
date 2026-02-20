@@ -8,24 +8,31 @@ html, body {
     padding: 0;
     box-sizing: border-box;
     font-family: sans-serif;
+    background: linear-gradient(180deg, #dcd7bb 0%, #b2b7a0 50%, #383535c0 100%) no-repeat fixed;
+
 }
+/* CONTAINER PRINCIPAL */
 .header-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Lado a lado no PC */
     align-items: center;
     padding: 60px 10%;
-    background-color: #fdf5e6a8;
-    flex-wrap: wrap;
+    background: linear-gradient(180deg, #dcd7bb 0%, #b2b7a0 50%, #383535c0 100%) no-repeat fixed;
+    flex-wrap: wrap; /* Permite quebrar linha no celular */
     gap: 20px;
 }
 
+/* TÍTULO PRINCIPAL */
 .header-container h1 {
     font-family: 'Playfair Display', serif;
     font-size: clamp(2.2rem, 6vw, 3.8rem);
     color: #2c1e14;
     margin: 0;
+    flex: 1; /* Ajuda no alinhamento */
+    min-width: 300px; /* Evita que o texto fique espremido demais */
 }
 
+/* CONTAINER DA ANIMAÇÃO (H2) */
 .header-container h2.imagem-rotativa {
     font-family: 'Roboto', sans-serif;
     font-size: clamp(1rem, 3vw, 1.8rem);
@@ -39,20 +46,23 @@ html, body {
     justify-content: center;
     min-width: 300px;
     height: 150px;
+    margin: 0;
 }
 
+/* TEXTO DENTRO DA ANIMAÇÃO */
 .header-container h2 span {
     position: absolute;
     white-space: nowrap;
     animation: blurCiclo 4.0s infinite ease-in-out;
 }
 
+/* ÍCONE DENTRO DA ANIMAÇÃO */
 .header-container h2::after {
     content: "";
     position: absolute;
     width: 130px; 
     height: 130px;
-    background-image: url('icone\ sebo\ .png');
+    background-image: url('icone\ sebo\ .png'); /* Certifique-se que o caminho está correto */
     background-size: cover;
     background-position: center;
     border-radius: 20px;
@@ -61,11 +71,44 @@ html, body {
     animation: blurCiclo 4.0s infinite ease-in-out 2.0s;
 }
 
+/* ANIMAÇÃO */
 @keyframes blurCiclo {
-    0%, 100% { opacity: 0; filter: blur(10px); transform: scale(0.95); }
-    10%, 40% { opacity: 1; filter: blur(0px); transform: scale(1); }
+    0%, 100% { 
+        opacity: 0; 
+        filter: blur(10px); 
+        transform: scale(0.95); 
+    }
+    10%, 40% { 
+        opacity: 1; 
+        filter: blur(0px); 
+        transform: scale(1); 
+    }
 }
 
+/* --- AJUSTES PARA CELULAR (RESPONSIVIDADE) --- */
+@media (max-width: 768px) {
+    .header-container {
+        justify-content: center; /* Centraliza horizontalmente */
+        text-align: center;      /* Centraliza o texto do H1 */
+        padding: 40px 5%;        /* Menos espaço lateral */
+    }
+
+    .header-container h1 {
+        flex: none;
+        width: 100%;             /* H1 ocupa a linha toda */
+        margin-bottom: 10px;
+    }
+
+    .header-container h2.imagem-rotativa {
+        min-width: 100%;         /* H2 ocupa a largura total disponível */
+        height: 120px;           /* Reduz a altura para não ocupar muito espaço */
+    }
+
+    .header-container h2::after {
+        width: 100px;            /* Ícone um pouco menor no celular */
+        height: 100px;
+    }
+}
 /* ==========================================================================
    2. CABEÇALHO (REPROPORCIONADO)
    ========================================================================== */
@@ -73,7 +116,7 @@ html, body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #fdf5e6a8;
+   background: linear-gradient(180deg, #dcd7bb 0%, #b2b7a0 50%, #383535c0 100%) no-repeat fixed;
     border-bottom: 2px solid rgba(0, 0, 0, 0.611);
     padding: 1.5rem 5%; /* Padding dinâmico */
 }
@@ -99,7 +142,7 @@ html, body {
 
 .teb {
     flex: 1;
-    background: #ffffff;
+    background: linear-gradient(180deg, #575755 0%, #c4c7b3 50%, #938888c0 100%) no-repeat fixed;
     border-radius: 12px;
     padding: 12px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.08);
