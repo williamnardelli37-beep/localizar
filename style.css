@@ -1,228 +1,285 @@
 /* ==========================================================================
-   1. TRAVAS E RESET (IMPEDE O ARRASTE LATERAL)
+   1. VARIÁVEIS E RESET MODERNO
    ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Roboto:wght@300;400;500;700&display=swap');
+
+:root {
+    --ouro: #d4af37;
+    --ouro-brilhante: #ffd700;
+    --marrom-nobre: #1c140e;
+    --bege-linho: #f7f5f0;
+    --glass-bg: rgba(255, 255, 255, 0.25);
+    --glass-border: rgba(255, 255, 255, 0.4);
+    --glass-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    --apple-easing: cubic-bezier(0.16, 1, 0.3, 1);
+    --transicao-suave: all 0.5s var(--apple-easing);
+}
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
 html, body {
     max-width: 100%;
     overflow-x: hidden;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: sans-serif;
-    background: linear-gradient(180deg, #dcd7bb 0%, #b2b7a0 50%, #383535c0 100%) no-repeat fixed;
-
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: linear-gradient(135deg, #dcd7bb 0%, #b2b7a0 50%, #383535 100%) no-repeat fixed;
+    color: var(--marrom-nobre);
+    -webkit-font-smoothing: antialiased;
 }
-/* CONTAINER PRINCIPAL */
+
+/* ==========================================================================
+   2. HEADER PRINCIPAL (LIQUID GLASS + SHIMMER)
+   ========================================================================== */
 .header-container {
     display: flex;
-    justify-content: space-between; /* Lado a lado no PC */
+    justify-content: space-between;
     align-items: center;
-    padding: 60px 10%;
-    background: linear-gradient(180deg, #dcd7bb 0%, #b2b7a0 50%, #383535c0 100%) no-repeat fixed;
-    flex-wrap: wrap; /* Permite quebrar linha no celular */
-    gap: 20px;
+    padding: 50px 8%;
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(25px) saturate(190%);
+    -webkit-backdrop-filter: blur(25px) saturate(190%);
+    border-bottom: 1px solid var(--glass-border);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    flex-wrap: wrap;
+    gap: 24px;
 }
 
-/* TÍTULO PRINCIPAL */
+/* Título com Degradê de Cor Dinâmico */
 .header-container h1 {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(2.2rem, 6vw, 3.8rem);
-    color: #2c1e14;
+    font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+    background: linear-gradient(90deg, #1c140e 0%, #5d4037 50%, #8b4513 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
     margin: 0;
-    flex: 1; /* Ajuda no alinhamento */
-    min-width: 300px; /* Evita que o texto fique espremido demais */
+    flex: 1;
+    min-width: 280px;
+    letter-spacing: -0.5px;
 }
 
-/* CONTAINER DA ANIMAÇÃO (H2) */
+/* Animação Rotativa do Cabeçalho */
 .header-container h2.imagem-rotativa {
     font-family: 'Roboto', sans-serif;
-    font-size: clamp(1rem, 3vw, 1.8rem);
+    font-size: clamp(1rem, 2.5vw, 1.6rem);
     color: #8b4513;
-    font-weight: 300;
+    font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 2px;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-width: 300px;
-    height: 150px;
+    min-width: 280px;
+    height: 140px;
     margin: 0;
 }
 
-/* TEXTO DENTRO DA ANIMAÇÃO */
 .header-container h2 span {
     position: absolute;
     white-space: nowrap;
     animation: blurCiclo 4.0s infinite ease-in-out;
 }
 
-/* ÍCONE DENTRO DA ANIMAÇÃO */
 .header-container h2::after {
     content: "";
     position: absolute;
-    width: 130px; 
-    height: 130px;
-    background-image: url('icone\ sebo\ .png'); /* Certifique-se que o caminho está correto */
+    width: 120px; 
+    height: 120px;
+    background-image: url('icone\ sebo\ .png');
     background-size: cover;
     background-position: center;
-    border-radius: 20px;
+    border-radius: 22px;
     opacity: 0;
     filter: blur(15px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
     animation: blurCiclo 4.0s infinite ease-in-out 2.0s;
 }
 
-/* ANIMAÇÃO */
 @keyframes blurCiclo {
     0%, 100% { 
         opacity: 0; 
-        filter: blur(10px); 
-        transform: scale(0.95); 
+        filter: blur(12px); 
+        transform: scale(0.92) translateY(5px); 
     }
-    10%, 40% { 
+    15%, 40% { 
         opacity: 1; 
         filter: blur(0px); 
-        transform: scale(1); 
+        transform: scale(1) translateY(0); 
+    }
+    55% { 
+        opacity: 0; 
+        filter: blur(12px); 
+        transform: scale(0.92) translateY(-5px); 
     }
 }
 
-/* --- AJUSTES PARA CELULAR (RESPONSIVIDADE) --- */
-@media (max-width: 768px) {
-    .header-container {
-        justify-content: center; /* Centraliza horizontalmente */
-        text-align: center;      /* Centraliza o texto do H1 */
-        padding: 40px 5%;        /* Menos espaço lateral */
-    }
-
-    .header-container h1 {
-        flex: none;
-        width: 100%;             /* H1 ocupa a linha toda */
-        margin-bottom: 10px;
-    }
-
-    .header-container h2.imagem-rotativa {
-        min-width: 100%;         /* H2 ocupa a largura total disponível */
-        height: 120px;           /* Reduz a altura para não ocupar muito espaço */
-    }
-
-    .header-container h2::after {
-        width: 100px;            /* Ícone um pouco menor no celular */
-        height: 100px;
-    }
-}
 /* ==========================================================================
-   2. CABEÇALHO (REPROPORCIONADO)
+   3. CABEÇALHO SECUNDÁRIO E LOCALIDADE
    ========================================================================== */
 .cabecalho {
     display: flex;
     justify-content: space-between;
     align-items: center;
-   background: linear-gradient(180deg, #dcd7bb 0%, #b2b7a0 50%, #383535c0 100%) no-repeat fixed;
-    border-bottom: 2px solid rgba(0, 0, 0, 0.611);
-    padding: 1.5rem 5%; /* Padding dinâmico */
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+    padding: 1.2rem 8%;
 }
 
-
-
 .localidade {
-    color: #5d4037;
-    font-size: clamp(0.8rem, 2vw, 1rem);
+    color: #4a332a;
+    font-size: clamp(0.85rem, 2vw, 1.05rem);
     font-style: italic;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
 /* ==========================================================================
-   3. CARDS DAS LOJAS (GOOGLE MAPS)
+   4. CARDS DAS LOJAS (GLASS CARDS 3D)
    ========================================================================== */
 .container-lojas {
     display: flex;
-    gap: 15px;
-    padding: 15px;
-    max-width: 900px;
+    gap: 20px;
+    padding: 30px 20px;
+    max-width: 960px;
     margin: 0 auto;
 }
 
 .teb {
     flex: 1;
-    background: linear-gradient(180deg, #575755 0%, #c4c7b3 50%, #938888c0 100%) no-repeat fixed;
-    border-radius: 12px;
-    padding: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(25px) saturate(180%);
+    -webkit-backdrop-filter: blur(25px) saturate(180%);
+    border-radius: 20px;
+    padding: 16px;
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
     display: flex;
     flex-direction: column;
-    border: 1px solid #eee;
+    transition: var(--transicao-suave);
+}
+
+.teb:hover {
+    transform: translateY(-8px);
+    background: rgba(255, 255, 255, 0.45);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+    border-color: rgba(255, 255, 255, 0.7);
 }
 
 .teb-content {
     display: flex;
     align-items: center;
-    gap: 8px;
-    margin-bottom: 10px;
+    gap: 10px;
+    margin-bottom: 12px;
 }
 
 .text-area span {
-    font-size: 0.9rem;
-    font-weight: bold;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--marrom-nobre);
+    letter-spacing: -0.2px;
 }
 
 .loja-foto {
     width: 100%;
-    aspect-ratio: 16 / 9; /* Formato cinema, ocupa menos espaço vertical */
+    aspect-ratio: 16 / 9;
     overflow: hidden;
-    border-radius: 8px;
-    margin-bottom: 10px;
+    border-radius: 14px;
+    margin-bottom: 14px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
 }
 
 .loja-foto img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.6s var(--apple-easing);
+}
+
+.teb:hover .loja-foto img {
+    transform: scale(1.06);
 }
 
 .btn-google {
     margin-top: auto;
-    background-color: #4285F4;
-    color: white;
+    background: linear-gradient(135deg, #4285F4 0%, #2b6cb0 100%);
+    color: #ffffff;
     text-decoration: none;
-    padding: 10px;
-    border-radius: 8px;
+    padding: 12px 18px;
+    border-radius: 12px;
     font-weight: 600;
-    font-size: 0.85rem;
+    font-size: 0.88rem;
     text-align: center;
+    letter-spacing: 0.3px;
+    box-shadow: 0 8px 20px rgba(66, 133, 244, 0.3);
+    transition: var(--transicao-suave);
+}
+
+.btn-google:hover {
+    background: linear-gradient(135deg, #3367d6 0%, #1a4980 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(66, 133, 244, 0.45);
 }
 
 /* ==========================================================================
-   4. CARROSSEL DE VENDAS (AJUSTADO PARA NÃO OCUPAR A TELA TODA)
+   5. CARROSSEL DE VENDAS COM LOOP CONTÍNUO E EFEITO FADE
    ========================================================================== */
 .venda {
-    color: #8b4513;
+    color: var(--marrom-nobre);
     text-align: center;
-    font-family: 'Times New Roman', Times, serif;
-    font-size: clamp(1.1rem, 3vw, 1.5rem);
-    margin: 20px 0 10px;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(1.4rem, 3.5vw, 2.1rem);
+    font-weight: 700;
+    margin: 40px 0 15px;
+    letter-spacing: -0.3px;
 }
 
 .promo-container {
     overflow: hidden;
     width: 100%;
-    padding: 10px 0;
+    padding: 25px 0;
     touch-action: pan-y;
+    position: relative;
+    /* Suavização contínua nas bordas laterais */
+    mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
 }
 
 .promo {
     display: flex;
     width: max-content;
-    gap: 15px;
-    animation: rolarInfinito 25s linear infinite;
+    gap: 22px;
+    animation: rolarInfinito 28s linear infinite;
+    will-change: transform;
+}
+
+.promo-container:hover .promo {
+    animation-play-state: paused;
 }
 
 .promo img {
-    /* No PC elas terão no máximo 180px, no Mobile diminuem */
-    width: clamp(100px, 25vw, 180px); 
-    height: auto; /* Mantém a proporção da capa do livro */
-    aspect-ratio: 2 / 3; 
+    width: clamp(120px, 22vw, 180px);
+    aspect-ratio: 2 / 3;
     object-fit: cover;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    border-radius: 14px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
     flex-shrink: 0;
+    transition: transform 0.5s var(--apple-easing), box-shadow 0.5s var(--apple-easing), filter 0.5s ease;
+    cursor: pointer;
+}
+
+.promo img:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+    filter: brightness(1.08);
 }
 
 @keyframes rolarInfinito {
@@ -231,25 +288,49 @@ html, body {
 }
 
 /* ==========================================================================
-   5. AJUSTES ESPECÍFICOS PARA TELEFONE (MOBILE)
+   6. RESPONSIVIDADE PARA TELEFONE (MOBILE)
    ========================================================================== */
 @media (max-width: 768px) {
+    .header-container {
+        justify-content: center;
+        text-align: center;
+        padding: 35px 5%;
+    }
+
+    .header-container h1 {
+        flex: none;
+        width: 100%;
+        margin-bottom: 5px;
+    }
+
+    .header-container h2.imagem-rotativa {
+        min-width: 100%;
+        height: 110px;
+    }
+
+    .header-container h2::after {
+        width: 95px;
+        height: 95px;
+    }
+
     .cabecalho {
         flex-direction: column;
         padding: 15px;
         text-align: center;
+        gap: 8px;
     }
 
     .container-lojas {
-        flex-direction: column; /* Empilha os cards */
-        padding: 10px;
+        flex-direction: column;
+        padding: 15px;
     }
 
     .teb {
-        margin-bottom: 10px;
+        margin-bottom: 5px;
     }
 
     .promo {
-        animation-duration: 15s; /* Mais rápido no celular por ter menos tela */
+        gap: 14px;
+        animation-duration: 18s;
     }
 }
